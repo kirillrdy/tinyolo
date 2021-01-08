@@ -1,4 +1,4 @@
-module tinyolo
+module github.com/kirillrdy/tinyyolo
 
 go 1.15
 

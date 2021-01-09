@@ -55,7 +55,6 @@ func init() {
 }
 
 var (
-	model   = flag.String("model", "tinyyolov2-7.onnx", "path to the model file")
 	imgF    = flag.String("img", "", "path of an input jpeg image (use - for stdin)")
 	outputF = flag.String("output", "", "path of an output png file (use - for stdout)")
 	silent  = flag.Bool("s", false, "silent mode (useful if output is -)")
@@ -109,9 +108,7 @@ func main() {
 		envconfig.Usage(envConfPrefix, &config)
 		os.Exit(0)
 	}
-	if _, err := os.Stat(*model); err != nil && os.IsNotExist(err) {
-		log.Fatalf("%v does not exist", *model)
-	}
+
 	// Create a backend receiver
 	backend := gorgonnx.NewGraph()
 	// Create a model and set the execution backend

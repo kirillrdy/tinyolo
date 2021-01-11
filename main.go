@@ -13,6 +13,7 @@ import (
 	"io"
 	"log"
 	"math"
+	"net/http"
 	"os"
 	"sort"
 
@@ -102,11 +103,17 @@ func ImageToBCHW(img image.Image, dst tensor.Tensor) error {
 
 func main() {
 	h := flag.Bool("h", false, "help")
+	enableWebServer := flag.Bool("web", false, "web server")
+
 	flag.Parse()
 	if *h {
 		flag.Usage()
 		envconfig.Usage(envConfPrefix, &config)
 		os.Exit(0)
+	}
+
+	if *enableWebServer {
+		http.ListenAndServe(":3000", nil)
 	}
 
 	// Create a backend receiver
